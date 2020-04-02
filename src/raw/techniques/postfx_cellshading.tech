@@ -1,0 +1,21 @@
+{
+	stateMap "default2d";
+
+	vertexShader 3.0 postfx_cellshading
+	{
+	}
+
+	pixelShader 3.0 postfx_cellshading
+	{
+		colorMapPostSunSampler = sampler.resolvedPostSun;
+		//colorMapSampler1 = sampler.postEffect1;		// all black
+		//colorMapSampler2 = sampler.postEffect0;   // sample from main menu blur or glow
+		//colorMapSampler = sampler.resolvedScene;  // hud ..
+		//colorMapSampler = sampler.white;
+		
+	}
+
+	vertex.position = code.position;
+	vertex.texcoord[0] = code.texcoord[0];
+
+}
