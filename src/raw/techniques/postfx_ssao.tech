@@ -1,0 +1,19 @@
+{
+	stateMap "default2d";
+
+	vertexShader 3.0 postfx_ssao
+	{
+	}
+
+	pixelShader 3.0 postfx_ssao
+	{
+		//colorMapPostSunSampler = sampler.resolvedPostSun; // framebuffer
+		//colorMapSampler = sampler.floatZ; // depth // floatZ
+		//colorMapSampler = sampler.postEffect0;
+		colorMapSampler1 = material.colorMap; // noise map
+	}
+
+	vertex.position = code.position;
+	vertex.texcoord[0] = code.texcoord[0];
+
+}

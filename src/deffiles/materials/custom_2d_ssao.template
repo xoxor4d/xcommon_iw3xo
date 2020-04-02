@@ -1,0 +1,20 @@
+#include "commonsetup.template"
+
+#if "@customString@" != ""
+	#define SSAO_TYPE "@customString@"
+#else
+	#define SSAO_TYPE ""
+#endif
+
+techniqueSet( "postfx_ssao" + SSAO_TYPE );
+
+textureTable
+{
+	#if "$colorMap$" != ""
+		"colorMap" = streamable map( "@tileColor@", "@filterColor@", "$colorMap$", @nopicmipColor@ ) "@formatColor@" : "colorMap";
+	#endif
+}
+
+refImage( "$colorMap$" );
+
+//refImage( "$white" );

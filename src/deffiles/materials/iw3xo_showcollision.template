@@ -1,0 +1,25 @@
+techniqueSet( "@customString@" );
+
+#include "commonsetup.template"
+
+textureTable
+{
+	#if "$colorMap$" == ""
+		#define COLOR_WHITE 1
+	#else
+		#define COLOR_WHITE 0
+	#endif
+
+	"colorMap" = streamable map( "@tileColor@", "@filterColor@", "$colorMap$", @nopicmipColor@ ) "@formatColor@" : "colorMap";
+}
+
+constantTable
+{
+	"colorTint" = float4( @,colorTint@ );
+}
+
+#if COLOR_WHITE
+	refImage( "$white" );
+#else
+	refImage( "$colorMap$" );
+#endif

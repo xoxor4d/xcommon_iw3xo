@@ -1,0 +1,17 @@
+{
+	stateMap "iw3xo_showcollision";
+
+	vertexShader 3.0 "iw3xo_showcollision_fakelight"
+	{
+	}
+
+	pixelShader 3.0 "iw3xo_showcollision_fakelight"
+	{
+		colorMapSampler = material.colorMap;
+	}
+
+	vertex.position = code.position;
+	vertex.normal = code.normal;
+	vertex.color[0] = code.color;
+	vertex.texcoord[0] = code.texcoord[0];
+}

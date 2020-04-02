@@ -1,0 +1,29 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"*.menu": "cpp",
+			"*.csv": "c",
+			"*.inc": "menu",
+			"menudef.h": "c",
+			"*.txt": "cpp",
+			"menudefinition.h": "c"
+		},
+		"files.exclude": {
+			".vs": true,
+			".vscode": true,
+			"*.code-workspace": true,
+			"*.log": true,
+			"*.sln*": true,
+			"*.vcxproj*": true,
+			"*.zip": true,
+			"material_properties": true,
+			"materials": true,
+			"vs_defines": true
+		}
+	}
+}

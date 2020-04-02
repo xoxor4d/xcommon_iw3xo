@@ -1,0 +1,22 @@
+{
+	stateMap "default2d";
+
+	vertexShader 3.0 postfx_ssao_apply
+	{
+	}
+
+	pixelShader 3.0 postfx_ssao_apply
+	{
+		//colorMapPostSunSampler = sampler.resolvedPostSun; // framebuffer // now ao, material is additive
+		//colorMapPostSunSampler = sampler.floatZ;
+		colorMapSampler = sampler.floatZ; // ao buffer
+		//colorMapSampler = sampler.floatZ;
+	}
+
+	vertex.position = code.position;
+	vertex.texcoord[0] = code.texcoord[0];
+
+}
+
+//sampler.postEffect1
+//sampler.feedback;

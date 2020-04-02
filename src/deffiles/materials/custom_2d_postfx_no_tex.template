@@ -1,0 +1,12 @@
+#include "commonsetup.template"
+
+#if "@customString@" != ""
+	#define SHADERNAME "@customString@"
+#else
+	#define SHADERNAME ""
+    #error "Must define a shader name in customString!"
+#endif
+
+techniqueSet( "postfx_" + SHADERNAME );
+
+refImage( "$white" );

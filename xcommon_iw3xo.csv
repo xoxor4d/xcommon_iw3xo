@@ -1,0 +1,32 @@
+//-//-//-//-//-//-//-//-//-//-//
+// :: Shaders
+
+material,z_shader_outliner
+material,z_shader_ssao
+material,z_shader_ssao_normal
+material,z_shader_ssao_blur
+material,z_shader_ssao_depth
+material,z_shader_ssao_apply
+material,z_shader_clear_white
+material,z_shader_postfx_cellshading 
+
+material,iw3xo_showcollision_fakelight
+material,iw3xo_showcollision_wire
+
+//-//-//-//-//-//-//-//-//-//-//
+// :: GSC
+
+//-//-//-//-//-//-//-//-//-//-//
+// :: Models
+
+xmodel,xo_radiantcam
+material,mtl_radiant_cam
+
+//-//-//-//-//-//-//-//-//-//-//
+// :: Weapons
+
+//-//-//-//-//-//-//-//-//-//-//
+// :: Menus
+
+// overwriting unused pregame screen "Press Start" (console cursor menu)
+menufile,ui/error.menu

@@ -1,0 +1,14 @@
+{
+	stateMap "iw3xo_showcollision_wire";
+
+	vertexShader 3.0 "iw3xo_showcollision_wire"
+	{
+	}
+
+	pixelShader 3.0 "iw3xo_showcollision_wire"
+	{
+	}
+
+	vertex.position = code.position;
+	vertex.color[0] = code.color;
+}

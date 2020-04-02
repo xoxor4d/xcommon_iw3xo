@@ -1,0 +1,5 @@
+#include "commonsetup.template"
+
+techniqueSet( "postfx_ssao_apply" );
+
+refImage( "$white" );

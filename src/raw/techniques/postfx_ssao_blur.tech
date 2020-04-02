@@ -1,0 +1,16 @@
+{
+	stateMap "default2d";
+
+	vertexShader 3.0 postfx_ssao_blur
+	{
+	}
+
+	pixelShader 3.0 postfx_ssao_blur
+	{
+		colorMapSampler = sampler.resolvedPostSun; // ao buffer
+	}
+
+	vertex.position = code.position;
+	vertex.texcoord[0] = code.texcoord[0];
+
+}

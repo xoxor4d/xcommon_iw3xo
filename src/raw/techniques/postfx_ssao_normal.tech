@@ -1,0 +1,17 @@
+{
+	stateMap "default2d";
+
+	vertexShader 3.0 postfx_ssao_normal
+	{
+	}
+
+	pixelShader 3.0 postfx_ssao_normal
+	{
+		//colorMapSampler = sampler.floatZ; // depth // floatZ
+		//colorMapSampler1 = material.colorMap; // noise map
+	}
+
+	vertex.position = code.position;
+	vertex.texcoord[0] = code.texcoord[0];
+
+}

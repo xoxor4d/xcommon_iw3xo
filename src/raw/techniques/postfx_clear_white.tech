@@ -1,0 +1,16 @@
+{
+	stateMap "default2d";
+
+	vertexShader 3.0 postfx_clear_white
+	{
+	}
+
+	pixelShader 3.0 postfx_clear_white
+	{
+		//colorMapSampler = sampler.colorMap;
+	}
+
+	vertex.position = code.position;
+	//vertex.texcoord[0] = code.texcoord[0];
+
+}
