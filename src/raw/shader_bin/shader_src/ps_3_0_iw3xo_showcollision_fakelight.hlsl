@@ -39,7 +39,7 @@ PixelOutput ps_main( const PixelInput pixel )
 	// diffuse
 	lightDir = sunPosition.xyz;
 	float diff = max(dot(wsNormal, lightDir), 0.0);
-	float3 diffuse = mul(diff, sunDiffuse.rgb);
+	float3 diffuse = clamp(mul(diff, sunDiffuse.rgb * 1.5f), 0.2f, 2.0f);
 
 	// Specular
 	float3 reflectDir = reflect(-lightDir, wsNormal);
