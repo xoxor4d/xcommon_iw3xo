@@ -262,153 +262,6 @@
 	
 	#define VIS_PRESS_START 1
 		
-	menuDef
-	{
-		name			"pregame_loaderror"
-		rect			0 0 640 480
-		fullScreen		1
-		focusColor		COLOR_FOCUSED
-		backcolor		1 1 1 0
-		style			WINDOW_STYLE_FILLED
-		onClose
-		{
-			uiScript clearError
-		}
-		onOpen
-		{
-			setdvar ui_SaveLoadVisible "0";
-		}
-		onEsc
-		{
-			uiScript playerstart
-		}
-
-		// background
-		itemDef 
-		{
-			style			WINDOW_STYLE_FILLED
-			rect			FULLSCREEN_WIDE
-			backcolor		1 1 1 1
-			visible			1
-			background		cinematic
-			ownerdraw		UI_CINEMATIC
-			decoration
-		}
-
-		itemDef
-		{
-			name			"profile"
-			visible			1
-			rect			40 40 560 400
-			ownerdraw		UI_LOADPROFILING
-			decoration
-		}
-
-		itemDef
-		{
-			name			errorinfo
-			rect			120 142 400 255
-			type			ITEM_TYPE_TEXT
-			style			WINDOW_STYLE_FILLED
-			textalign		ITEM_ALIGN_TOP_CENTER
-			autowrapped
-			dvar			"com_errorMessage"
-			textscale		.8
-			forecolor		1 .2 .2 1
-			visible			1
-			decoration
-		}
-
-#ifdef PS3
-		itemDef
-		{
-			type			ITEM_TYPE_BUTTON
-			text			"@PLATFORM_UI_PRESS_BUTTONSELECTCHOICE"
-			style			WINDOW_STYLE_FILLED
-			textscale		TEXTSIZE_SMALL
-			border			0
-			bordercolor		1 1 1 1
-			rect			0 388 640 45
-			textalign		ITEM_ALIGN_TOP_CENTER
-			textaligny		4
-			forecolor		1 1 1 0.4
-			backcolor		0 0 0 0
-			visible when ( !dvarbool( ui_isSaving ) && VIS_PRESS_START );
-			decoration
-		}
-#endif
-
-#ifdef XENON
-		itemDef
-		{
-			type			ITEM_TYPE_BUTTON
-			text			"@MENU_PRESS_START_TO_SKIP"
-			style			WINDOW_STYLE_FILLED
-			textscale		TEXTSIZE_SMALL
-			border			0
-			bordercolor		1 1 1 1
-			rect			0 388 640 45
-			textalign		ITEM_ALIGN_TOP_CENTER
-			textaligny		4
-			forecolor		1 1 1 0.4
-			backcolor		0 0 0 0
-			visible when ( !dvarbool( ui_isSaving ) && VIS_PRESS_START );
-			decoration
-		}
-#endif
-
-#ifdef PC
-		itemDef
-		{
-			type			ITEM_TYPE_BUTTON
-			text			"@MENU_CLICK_TO_START_THE_MISSION"
-			style			WINDOW_STYLE_FILLED
-			textscale		TEXTSIZE_SMALL
-			border			0
-			bordercolor		1 1 1 1
-			rect			0 388 640 45
-			textalign		ITEM_ALIGN_TOP_CENTER
-			textaligny		4
-			forecolor		1 1 1 0.4
-			backcolor		0 0 0 0
-			visible when ( !dvarbool( ui_isSaving ) && dvarstring( credits ) != "1" && VIS_PRESS_START );
-			decoration
-		}
-		itemDef
-		{
-			type			ITEM_TYPE_BUTTON
-			text			"@MENU_CLICK_TO_CONTINUE"
-			style			WINDOW_STYLE_FILLED
-			textscale		TEXTSIZE_SMALL
-			border			0
-			bordercolor		1 1 1 1
-			rect			0 388 640 45
-			textalign		ITEM_ALIGN_TOP_CENTER
-			textaligny		4
-			forecolor		1 1 1 0.4
-			backcolor		0 0 0 0
-			visible when ( !dvarbool( ui_isSaving ) && dvarstring( mapname ) == "credits" && VIS_PRESS_START );
-			decoration
-		}
-#endif // #ifdef PC
-
-		itemDef
-		{
-			type			ITEM_TYPE_BUTTON
-			rect			-128 0 896 480
-			style			WINDOW_STYLE_EMPTY
-			visible			1
-			forecolor		0 0 0 0
-			backcolor		0 0 0 0
-			action
-			{
-				uiScript playerstart
-			}
-		}
-
-		#include "ui/safearea.menu"
-	}
-
 	// empty menu helper to get a cursor in-game
 	menuDef
 	{
@@ -422,7 +275,10 @@
 		
 		onOpen
 		{
-			setdvar 	xo_con_cursorState "1";
+			// do not set xo_con_cursorState as it will be set within the console module
+			// otherwise the console module closes it again instantly and we need it open for imgui :)
+			
+			//setdvar 	xo_con_cursorState "1";
 			//setdvar ui_SaveLoadVisible "0";
 		}
 
@@ -434,8 +290,7 @@
 
 		onEsc
 		{
-			setdvar 	xo_con_cursorState "0";
-			close 	self;
+			close 		self;
 		}
 
 		// background
@@ -450,5 +305,4 @@
 
 		//#include "ui/safearea.menu"
 	}
-
 }
