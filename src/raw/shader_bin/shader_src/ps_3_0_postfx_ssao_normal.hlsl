@@ -34,7 +34,10 @@ static float FOV = 1.0f * filterTap[1][2]; // 1.0 * cg_fov / cg_fovScale
 //static float2 rcpres = float2(texelSizeX, texelSizeY); // size of 1 pixel horz. and vert.
 static float2 rcpres = float2(1.0f / (1.0f * filterTap[0][2]), 1.0f / (1.0f * filterTap[0][3]));
 static float2 realRenderTargetSize = float2(1.0f * filterTap[0][2], 1.0f * filterTap[0][3]);
-static const float2 g_InvFocalLen = { tan(0.5f * radians(FOV)) / rcpres.y * rcpres.x, tan(0.5f * radians(FOV)) }; 
+
+//static const float2 g_InvFocalLen = { tan(0.5f * radians(FOV)) / rcpres.y * rcpres.x, tan(0.5f * radians(FOV)) }; 
+static const float2 g_InvFocalLen = { tan(1.0f * radians(FOV)) / rcpres.y * rcpres.x, tan(0.5f * radians(FOV)) }; 
+
 static const float2 g_FocalLen = 1.0 / g_InvFocalLen;
 static float _ANGLEBIAS = (1.0f * filterTap[2][2]) * (M_PI / 180); // xo_ssao_attenuation // stock = 30 * (M_PI / 180) == 0.523; // maybe create a dvar
 
@@ -229,19 +232,19 @@ PixelOutput ps_main( const PixelInput pixel )
     // define our output struct as "fragment"
     PixelOutput fragment;
 
-    const float _NOISESCALE     = 1.0f      * filterTap[0][0]; // xo_ssao_noisescale // 40.0
-    const float _STRENGTH       = 1.0f      * filterTap[0][1]; // xo_ssao_strenght   // 2.0
-    const float _BASE           = 1.0f      * filterTap[0][2]; // xo_ssao_base       // 1.4
-    const float _AREA           = 1.0f      * filterTap[0][3]; // xo_ssao_area       // 100.0
+    float _NOISESCALE     = 1.0f      * filterTap[0][0]; // xo_ssao_noisescale // 40.0
+    float _STRENGTH       = 1.0f      * filterTap[0][1]; // xo_ssao_strenght   // 2.0
+    float _BASE           = 1.0f      * filterTap[0][2]; // xo_ssao_base       // 1.4
+    float _AREA           = 1.0f      * filterTap[0][3]; // xo_ssao_area       // 100.0
     const float _FALLOFF        = 0.000001f;                        
-    const float _RADIUS         = 1.0f      * filterTap[1][0]; // xo_ssao_radius    // 0.06
+    float _RADIUS         = 1.0f      * filterTap[1][0]; // xo_ssao_radius    // 0.06
 
-    const float _NUMSTEPS       = 8.0f      * filterTap[2][3]; // xo_ssao_numSteps  // 8.0  // not in use, not avail. on PS3.0
-    const float _NUMDIR         = 16.0f     * filterTap[1][3]; // xo_ssao_numDir    // 16.0 // not in use, not avail. on PS3.0
-    const float _CONTRAST       = 1.0f      * filterTap[2][0]; // xo_ssao_contrast  // 1.25
+    const float _NUMSTEPS       = 8.0f; // xo_ssao_numSteps  // 8.0  // not in use, not avail. on PS3.0
+    const float _NUMDIR         = 16.0f; // xo_ssao_numDir    // 16.0 // not in use, not avail. on PS3.0
+    float _CONTRAST       = 1.0f      * filterTap[2][0]; // xo_ssao_contrast  // 1.25
 
     const float _NUMSTEPS_STATIC    = 8.0f;
-    const float _NUMDIR_STATIC      = 16.0f;
+    const float _NUMDIR_STATIC      = 10.0f;
 
     float3 P = fetch_eye_pos(pixel.texcoord);
 
