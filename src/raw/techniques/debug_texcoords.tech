@@ -1,0 +1,18 @@
+// * COD4-SHADERGEN - xoxor4d.github.io
+// * Template used : [shadergen_2d_no_image.tech]
+// * Mat. Template : [shadergen_2d_no_image.template]
+
+{
+	stateMap "default";
+
+	vertexShader 3.0 "debug_texcoords"
+	{
+	}
+
+	pixelShader 3.0 "debug_texcoords"
+	{
+	}
+
+	vertex.position = code.position;
+	vertex.texcoord[0] = code.texcoord[0];
+}

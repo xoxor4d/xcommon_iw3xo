@@ -15,6 +15,8 @@ echo.
 echo.
 echo --------------- Compiling shaders --------------------
 cd ..\..\raw\shader_bin
+shader_tool debug_texcoords
+shader_tool debug_texcoords_dtex
 shader_tool iw3xo_showcollision_fakelight
 shader_tool iw3xo_showcollision_wire
 shader_tool postfx_cellshading
