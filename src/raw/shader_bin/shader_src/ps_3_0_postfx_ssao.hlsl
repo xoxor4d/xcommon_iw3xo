@@ -198,6 +198,7 @@ float AccumulatedHorizonOcclusion(float2 deltaUV, float2 uv0, float3 P, float ra
     float sinH = tanH / sqrt(1.0f + tanH * tanH);
 
     float ao = 0;
+    [loop]
     for(float j = 1; j <= 8.0; ++j) 
     {
         uv += deltaUV;
@@ -292,6 +293,7 @@ PixelOutput ps_main( const PixelInput pixel )
         float d;
         float alpha = 2.0f * M_PI / _NUMDIR_STATIC;
 
+        [loop]
         for (d = 0; d < _NUMDIR_STATIC; ++d) 
         {
                 float angle = alpha * d;

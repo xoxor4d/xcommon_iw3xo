@@ -13,6 +13,9 @@ material,z_shader_postfx_cellshading
 material,iw3xo_showcollision_fakelight
 material,iw3xo_showcollision_wire
 
+material,debug_texcoords
+material,debug_texcoords_dtex
+
 //-//-//-//-//-//-//-//-//-//-//
 // :: GSC
 
