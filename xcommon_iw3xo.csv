@@ -16,6 +16,9 @@ material,iw3xo_showcollision_wire
 material,debug_texcoords
 material,debug_texcoords_dtex
 
+material,iw3xo_daynight
+material,wc/iw3xo_daynight
+
 //-//-//-//-//-//-//-//-//-//-//
 // :: GSC
 

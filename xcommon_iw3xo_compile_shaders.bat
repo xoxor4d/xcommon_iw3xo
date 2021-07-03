@@ -27,6 +27,7 @@ shader_tool postfx_ssao_apply
 shader_tool postfx_ssao_blur
 shader_tool postfx_ssao_depth
 shader_tool postfx_ssao_normal
+shader_tool iw3xo_daynight
 
 @echo off
 echo.

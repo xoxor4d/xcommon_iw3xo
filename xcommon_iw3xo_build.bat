@@ -49,6 +49,13 @@ echo.
 xcopy codescripts ..\..\raw\codescripts /SY
 echo.
 xcopy xcommon_iw3xo.csv ..\..\zone_source /SY
+echo.
+xcopy src\raw\statemaps ..\..\raw\statemaps /SYI
+echo.
+xcopy src\raw\techniques ..\..\raw\techniques /SYI
+echo.
+xcopy src\raw\techsets ..\..\raw\techsets /SYI
+echo.
 
 @echo off
 echo.

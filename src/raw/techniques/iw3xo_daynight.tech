@@ -1,0 +1,21 @@
+// * COD4-SHADERGEN - xoxor4d.github.io
+// * Template used : [shadergen_sky_sample_camera_input.tech]
+// * Mat. Template : [shadergen_sky_single_image.template]
+
+{
+	stateMap "color_only";
+
+	vertexShader 3.0 "iw3xo_daynight"
+	{
+	}
+
+	pixelShader 3.0 "iw3xo_daynight"
+	{
+        detailMapSampler = material.detailMap;
+		skyMapSampler = material.colorMap;
+        //colorMapSampler = material.specularMap;
+	}
+
+	vertex.position = code.position;
+    //vertex.texcoord[0] = code.texcoord[0];
+}
