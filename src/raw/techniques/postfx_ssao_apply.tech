@@ -9,8 +9,9 @@
 	{
 		//colorMapPostSunSampler = sampler.resolvedPostSun; // framebuffer // now ao, material is additive
 		//colorMapPostSunSampler = sampler.floatZ;
-		colorMapSampler = sampler.floatZ; // ao buffer
-		//colorMapSampler = sampler.floatZ;
+		//colorMapSampler = sampler.floatZ; // ao buffer
+		colorMapSampler = sampler.resolvedScene;
+		//colorMapSampler = sampler.resolvedPostSun;
 	}
 
 	vertex.position = code.position;

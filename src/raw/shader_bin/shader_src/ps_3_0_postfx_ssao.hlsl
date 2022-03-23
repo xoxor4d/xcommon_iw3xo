@@ -7,7 +7,7 @@ struct PixelInput
 {
     float4 position     : POSITION;
     float2 texcoord     : TEXCOORD0;
-    float4 screenCoords : TEXCOORD1;
+    float2 tilecoords 	: TEXCOORD1;
 };
 
 // output struct
@@ -58,7 +58,14 @@ float3 uv_to_eye(float2 uv, float eye_z)
 float3 fetch_eye_pos(float2 uv)
 {
     float z = tex2D(floatZSampler, uv).r;
-    return uv_to_eye(uv, z);
+
+
+	 float depthBuffer = tex2D(floatZSampler, uv).r;
+
+    float ndcDepth = (2.0 * depthBuffer - 0.1f - 256.0f) / (256.0f - 0.1f);
+    ndcDepth = (ndcDepth * 0.5) + 0.5;
+
+    return uv_to_eye(uv, ndcDepth);
 }
 
 //----------------------------------------------------------------------------------
@@ -287,7 +294,8 @@ PixelOutput ps_main( const PixelInput pixel )
         // (cos(alpha),sin(alpha),jitter)
         //float3 rand = tRandom.Load(int3((int)IN.pos.x&63, (int)IN.pos.y&63, 0)).xyz;
         //float3 rand = normalize( tex2D(colorMapSampler1, renderTargetSize.xy * pixel.texcoord.xy / _NOISESCALE ).rgb * 2.0f - 1.0f);
-        float3 rand = normalize( tex2D(colorMapSampler1, realRenderTargetSize.xy * pixel.texcoord.xy / _NOISESCALE ).rgb * 2.0f - 1.0f);
+        //float3 rand = normalize( tex2D(colorMapSampler1, realRenderTargetSize.xy * pixel.texcoord.xy / _NOISESCALE ).rgb * 2.0f - 1.0f);
+		float3 rand = normalize( tex2D(colorMapSampler1, realRenderTargetSize.xy * pixel.tilecoords.xy / _NOISESCALE ).rgb * 2.0f - 1.0f);
 
         float ao = 0;
         float d;

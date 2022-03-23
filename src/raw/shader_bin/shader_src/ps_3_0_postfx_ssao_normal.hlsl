@@ -58,7 +58,14 @@ float3 uv_to_eye(float2 uv, float eye_z)
 float3 fetch_eye_pos(float2 uv)
 {
     float z = tex2D(floatZSampler, uv).r;
-    return uv_to_eye(uv, z);
+
+
+	 float depthBuffer = tex2D(floatZSampler, uv).r;
+
+    float ndcDepth = (2.0 * depthBuffer - 0.1f - 256.0f) / (256.0f - 0.1f);
+    ndcDepth = (ndcDepth * 0.5) + 0.5;
+
+    return uv_to_eye(uv, ndcDepth);
 }
 
 //----------------------------------------------------------------------------------
@@ -198,6 +205,7 @@ float AccumulatedHorizonOcclusion(float2 deltaUV, float2 uv0, float3 P, float ra
     float sinH = tanH / sqrt(1.0f + tanH * tanH);
 
     float ao = 0;
+	[loop]
     for(float j = 1; j <= 8.0; ++j) 
     {
         uv += deltaUV;
@@ -255,7 +263,6 @@ PixelOutput ps_main( const PixelInput pixel )
     // Early out if the projected radius is smaller than 1 pixel.
     //float numSteps = min ( _NUMSTEPS_STATIC, min(step_size.x * renderTargetSize.x, step_size.y * renderTargetSize.y));
     float numSteps = min ( _NUMSTEPS_STATIC, min(step_size.x * realRenderTargetSize.x, step_size.y * realRenderTargetSize.y));
-    
     if( numSteps < 1.0 ) 
     {
         fragment.color = float4( 1.0, 1.0, 1.0, 1.0 );

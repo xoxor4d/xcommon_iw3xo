@@ -36,6 +36,6 @@ PixelOutput ps_main( const PixelInput pixel )
     //fragment.color = float4(framebuffer * ao, 1.0f);
 
     fragment.color = float4(tex2D(colorMapSampler, pixel.texcoord).rrr, 1.0f);
-
+	//fragment.color.r *= sin(gameTime.w);
 	return fragment;
 }

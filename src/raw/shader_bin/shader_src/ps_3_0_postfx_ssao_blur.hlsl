@@ -66,7 +66,7 @@ PixelOutput ps_main( const PixelInput pixel )
     float3 c = tex2D( colorMapSampler, perspective_texcoords ).rgb;
 
 	//declare stuff
-	const int mSize = 11;
+	const int mSize = 13;
 	const int kSize = (mSize - 1 ) / 2;
 	float kernel[mSize];
 	float3 final_colour = float3(0.0, 0.0, 0.0);

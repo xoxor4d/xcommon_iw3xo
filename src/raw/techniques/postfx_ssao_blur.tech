@@ -7,7 +7,7 @@
 
 	pixelShader 3.0 postfx_ssao_blur
 	{
-		colorMapSampler = sampler.resolvedPostSun; // ao buffer
+		colorMapSampler = sampler.resolvedScene; // ao buffer
 	}
 
 	vertex.position = code.position;

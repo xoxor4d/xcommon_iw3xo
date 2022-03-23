@@ -13,7 +13,7 @@ struct PixelInput
 {
     float4 position     : POSITION;
     float2 texcoord     : TEXCOORD0;
-	//float4 screenCoords : TEXCOORD1;
+	float2 tilecoords 	: TEXCOORD1;
 };
 
 float4 Transform_ClipSpacePosToTexCoords( float4 position )
@@ -27,6 +27,7 @@ PixelInput vs_main( const VertexInput vertex )
 
 	pixel.position = mul(float4(vertex.position.xyz, 1.0f), worldViewProjectionMatrix);
 	pixel.texcoord = vertex.texcoord;
+	pixel.tilecoords = vertex.position.xy / renderTargetSize.y * float2(0.01f, 0.01f);
 
 	//pixel.screenCoords = Transform_ClipSpacePosToTexCoords( pixel.position );
 
