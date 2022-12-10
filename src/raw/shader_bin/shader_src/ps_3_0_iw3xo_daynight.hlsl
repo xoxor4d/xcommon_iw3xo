@@ -31,8 +31,9 @@ struct PixelOutput
 #define STEPS_AFTER_THRESHOLD   STEPS * 0.5          
 #define EXPOSURE                filterTap[3].w       
 
-#define WIND_VEC                filterTap[4].xyz     
-#define WIND_SPEED              filterTap[4].w       
+//#define WIND_VEC                filterTap[4].xyz     
+#define WIND_VEC 				float3(cos(filterTap[4].z), 0.0f, sin(filterTap[4].z)) //float3(0.01f, 0.0f, 0.01f)
+#define WIND_SPEED              filterTap[4].w
 
 // Atmosphere code from: https://github.com/wwwtyro/glsl-atmosphere
 // Transferred to Godot by Bastiaan Olij
@@ -373,8 +374,10 @@ float density(float3 pos, float3 offset,float t)
 
 float light(in float3 origin)
 {
-	const int steps = 8;
-	float  march_step = 1.0f;
+	int steps = int(filterTap[4].x);
+
+	//const int steps = 4;
+	float  march_step = 2.0f;
 
 	float3 pos      = origin;
 	float3 dir_step = sun_pos * march_step;
@@ -382,6 +385,7 @@ float light(in float3 origin)
 
     float3 wind = float3(gameTime.w * (WIND_VEC.xyz * WIND_SPEED));
 
+	[loop]
 	for (int i = 0; i < steps; i++) 
     {
 		float dens = density(pos, wind, 0.0f);
@@ -418,7 +422,13 @@ float4 render_clouds(float3 ro, float3 rd)
         float  T            = 1.0f;
 
         int steps_threshold = 0;
-        
+		int steps_threshold_offs = 0;
+
+
+		//int dyn_step_threshold = int(filterTap[4].z);
+		float dyn_step_dist_inc = filterTap[4].y + 0.1f;
+		float dyn_step_dist = STEP_DISTANCE_XZ;
+
         [loop]
         for (int i = 0; i < steps; i++) 
         {
@@ -440,24 +450,41 @@ float4 render_clouds(float3 ro, float3 rd)
             {
                 break;
             }
+
+			
+			if (int(filterTap[4].x) <= 0)
+			{
+				// fakelight (compiler doesnt like that)
+            	C += T * (exp(h) / 1.75) * dens * march_step;
+			}
+			else
+			{
+				// simulate light (why does that work and the above fails?)
+            	C += T * light(pos) * dens * march_step;
+			}
             
-            // fakelight (compiler doesnt like that)
-            //C += T * (exp(h) / 1.75) * dens * march_step;
-
-            // simulate light (why does that work and the above fails?)
-            C += T * light(pos) * dens * march_step;
-
             alpha += (1.0 - T_i) * (1.0 - alpha);
             pos += dir_step;
 
             // less detailed / stepped clouds at distance
-            if(length(pos.xz) > STEP_DISTANCE_XZ)
+            if(length(pos.xz) > dyn_step_dist)
             {
                 // take half size steps (better fade)
                 pos -= (dir_step * 0.5f); 
-                march_step = thickness / float(steps * 0.5f);
+                //march_step = thickness / float(steps * 0.5f);
 
-                steps_threshold++;
+				
+				if (steps_threshold_offs > 3) // 3
+				{
+					steps_threshold++;
+					steps_threshold_offs = 0;
+				}
+				else
+				{
+					steps_threshold_offs++;
+				}
+                
+				dyn_step_dist += dyn_step_dist_inc; // 5
             }
 
             if(length(pos) > 800.0f) // 1e3 = 1000
