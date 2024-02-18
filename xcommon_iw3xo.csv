@@ -41,7 +41,6 @@ material,mtl_radiant_cam
 // overwriting unused pregame screen "Press Start" (console cursor menu)
 menufile,ui/error.menu
 
-
 //-//-//-//-//-//-//-//-//-//-//
 // :: MP-SP
 
@@ -71,5 +70,3 @@ xmodel,body_mp_arab_regular_assault
 xmodel,head_mp_arab_regular_suren
 xmodel,body_mp_arab_regular_support
 xmodel,head_mp_arab_regular_asad
-
-xmodel,com_junktire
